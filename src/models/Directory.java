@@ -72,7 +72,12 @@ public class Directory {
                 if (bucket.getEntryValues().size() < 2) {
                     bucket.getEntryValues().add(key);
                 } else {
-                    duplicateDirectorySize();
+                    duplicateDirectorySize(); //duplica o diretório
+                    Line correctLine = lines.stream()//acha o novo bucket que vai receber parte dos valores distribuidos
+                            .filter((line) -> Objects.equals(line.getIndex(), bucketName))
+                            .findFirst()
+                            .orElse(null);
+                    distributeBucket(lineFind.get(0), correctLine, globalDepth );
                 }
             }
         }
